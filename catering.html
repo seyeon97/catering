@@ -271,9 +271,9 @@
   <label for="class-type">잔 수(1일 기준)</label>
   <select name="type" id="class-type" required>
     <option value="약 100잔">약 100잔</option>
+    <option value="약 150잔">약 150잔</option>
     <option value="약 200잔">약 200잔</option>
-    <option value="약 300잔">약 300잔</option>
-    <option value="약 400잔">약 400잔</option>
+    <option value="약 250잔">약 250잔</option>
   </select>
   <label for="quantity-input">행사 일수</label>
   <input type="number" name="quantity" id="quantity-input" required min="1">
@@ -333,9 +333,9 @@ document.getElementById("quote-form").addEventListener("submit", function(e) {
 
   const priceTable = {
     "약 100잔": { base: 900000, extra: 800000 },
-    "약 200잔": { base: 1300000, extra: 1200000 },
-    "약 300잔": { base: 1700000, extra: 1600000 },
-    "약 400잔": { base: 2100000, extra: 2000000 }
+    "약 150잔": { base: 1300000, extra: 1200000 },
+    "약 200잔": { base: 1700000, extra: 1600000 },
+    "약 250잔": { base: 2100000, extra: 2000000 }
   };
 
   const maxAllowed = 30;
