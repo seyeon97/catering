@@ -274,6 +274,9 @@
     <option value="약 150잔">약 150잔</option>
     <option value="약 200잔">약 200잔</option>
     <option value="약 250잔">약 250잔</option>
+    <option value="약 250잔">약 300잔</option>
+    <option value="약 250잔">약 350잔</option>
+    <option value="약 250잔">약 400잔</option>
   </select>
   <label for="quantity-input">행사 일수</label>
   <input type="number" name="quantity" id="quantity-input" required min="1">
@@ -335,7 +338,10 @@ document.getElementById("quote-form").addEventListener("submit", function(e) {
     "약 100잔": { base: 900000, extra: 800000 },
     "약 150잔": { base: 1300000, extra: 1200000 },
     "약 200잔": { base: 1700000, extra: 1600000 },
-    "약 250잔": { base: 2100000, extra: 2000000 }
+    "약 250잔": { base: 2100000, extra: 2000000 },
+          "약 300잔": { base: 2500000, extra: 2400000 },
+          "약 350잔": { base: 2900000, extra: 2800000 },
+          "약 400잔": { base: 3300000, extra: 3200000 }
   };
 
   const maxAllowed = 30;
