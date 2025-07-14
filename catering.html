@@ -277,7 +277,7 @@
   </select>
   <label for="quantity-input">행사 일수</label>
   <input type="number" name="quantity" id="quantity-input" required min="1">
-  <p id="warning-message">⚠ 클래스 유형에 맞는 인원 수를 입력해 주세요.</p>
+  <p id="warning-message">⚠ 행사 기간은 최대 30일까지만 신청 가능합니다!</p>
   <button type="submit" id="submit-button">견적서 보기</button>
 </form>
 
@@ -338,7 +338,7 @@ document.getElementById("quote-form").addEventListener("submit", function(e) {
     "약 400잔": { base: 2100000, extra: 2000000 }
   };
 
-  const maxAllowed = 15;
+  const maxAllowed = 30;
 
   if (quantity < 1 || quantity > maxAllowed) {
     quantityInput.classList.add("invalid");
