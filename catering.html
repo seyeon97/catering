@@ -261,20 +261,21 @@
   <h2>케이터링 견적서</h2>
   <label for="company">회사명</label>
   <input type="text" name="company" id="company" required>
-  <label for="manager">담당자 이름</label>
+  <label for="manager">행사명</label>
   <input type="text" name="manager" id="manager" required>
-  <label for="class-kind">클래스 종류</label>
+  <label for="class-kind">케이터링 유형</label>
   <select name="classKind" id="class-kind" required>
-    <option value="핸드드립 클래스">핸드드립 클래스</option>
-    <option value="드립백 클래스">드립백 클래스</option>
+    <option value="에스프레소 커피 케이터링">에스프레소 커피 케이터링</option>
+    <option value="핸드드립 커피 케이터링">핸드드립 커피 케이터링</option>
   </select>
-  <label for="class-type">클래스 인원</label>
+  <label for="class-type">잔 수(1일 기준)</label>
   <select name="type" id="class-type" required>
-    <option value="15인 이하">15인 이하</option>
-    <option value="16~50인">16인 이상 ~ 50인 이하</option>
-    <option value="51인 이상">51인 이상</option>
+    <option value="약 100잔">약 100잔</option>
+    <option value="약 200잔">약 200잔</option>
+    <option value="약 300잔">약 300잔</option>
+    <option value="약 400잔">약 400잔</option>
   </select>
-  <label for="quantity-input">인원 수</label>
+  <label for="quantity-input">행사 일수</label>
   <input type="number" name="quantity" id="quantity-input" required min="1">
   <p id="warning-message">⚠ 클래스 유형에 맞는 인원 수를 입력해 주세요.</p>
   <button type="submit" id="submit-button">견적서 보기</button>
@@ -334,18 +335,23 @@ document.getElementById("quote-form").addEventListener("submit", function(e) {
   let minAllowed = 1;
   let maxAllowed = Infinity;
 
-  if (type === "15인 이하") {
+  if (type === "약 100잔") {
     unitPrice = 50000;
     maxAllowed = 15;
-  } else if (type === "16~50인") {
+  } else if (type === "약 200잔") {
     unitPrice = 45000;
     minAllowed = 16;
     maxAllowed = 50;
-  } else if (type === "51인 이상") {
+  } else if (type === "약 300잔") {
+    unitPrice = 35000;
+    minAllowed = 51;
+    maxAllowed = 150;
+  } else if (type === "약 400잔") {
     unitPrice = 35000;
     minAllowed = 51;
     maxAllowed = 150;
   }
+        
 
   if (quantity < minAllowed || quantity > maxAllowed) {
     quantityInput.classList.add("invalid");
