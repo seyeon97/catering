@@ -331,26 +331,16 @@ document.getElementById("quote-form").addEventListener("submit", function(e) {
   const quantity = parseInt(quantityInput.value);
   const warning = document.getElementById("warning-message");
 
-  let unitPrice = 0;
-  let minAllowed = 1;
-  let maxAllowed = Infinity;
+  const priceTable = {
+    "약 100잔": { base: 900000, extra: 800000 },
+    "약 200잔": { base: 1300000, extra: 1200000 },
+    "약 300잔": { base: 1700000, extra: 1600000 },
+    "약 400잔": { base: 2100000, extra: 2000000 }
+  };
 
-  if (type === "약 100잔") {
-    unitPrice = 900000;
-    maxAllowed = 15;
-  } else if (type === "약 200잔") {
-    unitPrice = 1300000;
-    maxAllowed = 15;
-  } else if (type === "약 300잔") {
-    unitPrice = 1700000;
-    maxAllowed = 15;
-  } else if (type === "약 400잔") {
-    unitPrice = 2100000;
-    maxAllowed = 15;
-  }
-        
+  const maxAllowed = 15;
 
-  if (quantity < minAllowed || quantity > maxAllowed) {
+  if (quantity < 1 || quantity > maxAllowed) {
     quantityInput.classList.add("invalid");
     warning.style.display = "block";
     return;
@@ -359,13 +349,18 @@ document.getElementById("quote-form").addEventListener("submit", function(e) {
     warning.style.display = "none";
   }
 
-  const total = unitPrice * quantity;
+  const { base, extra } = priceTable[type];
+  const total = quantity === 1 ? base : base + (quantity - 1) * extra;
+  const unitText = quantity === 1
+    ? base.toLocaleString()
+    : `${base.toLocaleString()} + ${extra.toLocaleString()} × ${quantity - 1}`;
+
   const today = new Date().toISOString().split("T")[0];
 
   document.getElementById("quote-date").textContent = today;
   document.getElementById("output-company").textContent = company;
   document.getElementById("output-type").textContent = `${classKind} (${type})`;
-  document.getElementById("output-unit").textContent = unitPrice.toLocaleString();
+  document.getElementById("output-unit").textContent = unitText;
   document.getElementById("output-quantity").textContent = quantity;
   document.getElementById("output-total").textContent = total.toLocaleString();
   document.getElementById("output-total-sum").textContent = total.toLocaleString();
@@ -376,7 +371,6 @@ document.getElementById("quote-form").addEventListener("submit", function(e) {
 function printPage() {
   const element = document.getElementById("quote-output");
   element.style.display = "block";
-  // 렌더링 확인 후 인쇄
   setTimeout(() => {
     window.print();
   }, 100);
@@ -385,7 +379,6 @@ function printPage() {
 function downloadQuotePdf() {
   const element = document.getElementById("quote-output");
   element.style.display = "block";
-  // 렌더링 확인 후 인쇄 및 안내
   setTimeout(() => {
     alert('인쇄 창이 열립니다. "PDF로 저장" 또는 "Microsoft Print to PDF"를 선택해 저장해 주세요.\n\n설정 방법:\n- 크롬: "추가 설정" > "배경 그래픽" 체크\n- 파이어폭스: "PDF로 저장" 옵션 선택\n- 엣지: "Microsoft Print to PDF" 사용');
     window.print();
